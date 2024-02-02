@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click-to-Draw Canvas</title>
+    <title>Connect-the-Dots Canvas</title>
     <style>
         body {
             margin: 0;
@@ -26,28 +26,30 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Ensure line stays within canvas boundaries
-        const limitX = canvas.width - 1; // Adjust for 1px line width
-        const limitY = canvas.height - 1;
+        let point1, point2;
+        let isDrawing = false;
 
-        function drawRandomLine(event) {
-            // Set line width to 1 pixel
-            ctx.lineWidth = 1;
+        canvas.addEventListener('click', (event) => {
+            const clickX = event.offsetX;
+            const clickY = event.offsetY;
 
-            // Calculate random endpoints within canvas bounds
-            const startX = Math.floor(Math.random() * limitX);
-            const startY = Math.floor(Math.random() * limitY);
-            const endX = Math.floor(Math.random() * limitX);
-            const endY = Math.floor(Math.random() * limitY);
+            if (!isDrawing) {
+                point1 = { x: clickX, y: clickY };
+                isDrawing = true;
+            } else {
+                point2 = { x: clickX, y: clickY };
+                isDrawing = false;
 
-            ctx.beginPath();
-            ctx.strokeStyle = 'black'; // Set line color to black
-            ctx.moveTo(startX, startY);
-            ctx.lineTo(endX, endY);
-            ctx.stroke();
-        }
-
-        canvas.addEventListener('click', drawRandomLine);
+                ctx.beginPath();
+                ctx.strokeStyle = 'black'; // Line color
+                ctx.lineWidth = 1; // Line width
+                ctx.moveTo(point1.x, point1.y);
+                ctx.lineTo(point2.x, point2.y);
+                ctx.stroke();
+                point1 = undefined;
+                point2 = undefined;
+            }
+        });
     </script>
 </body>
 </html>
