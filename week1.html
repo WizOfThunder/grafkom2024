@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click-to-Draw Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #canvas {
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="512" height="512"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ensure line stays within canvas boundaries
+        const limitX = canvas.width - 1; // Adjust for 1px line width
+        const limitY = canvas.height - 1;
+
+        function drawRandomLine(event) {
+            // Set line width to 1 pixel
+            ctx.lineWidth = 1;
+
+            // Calculate random endpoints within canvas bounds
+            const startX = Math.floor(Math.random() * limitX);
+            const startY = Math.floor(Math.random() * limitY);
+            const endX = Math.floor(Math.random() * limitX);
+            const endY = Math.floor(Math.random() * limitY);
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'black'; // Set line color to black
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+        }
+
+        canvas.addEventListener('click', drawRandomLine);
+    </script>
+</body>
+</html>
