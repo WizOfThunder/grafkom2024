@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <canvas id="myCanvas" width="1024" height="512"></canvas>
+    <canvas id="myCanvas" width="650" height="512"></canvas>
     <script>
         const canvas = document.getElementById('myCanvas');
         const ctx = canvas.getContext('2d');
@@ -39808,21 +39808,15 @@
         ]
     ]
 
-    const dotRadius = 2;
-const maxCoordinate = 1; // Assuming your data points are normalized between 0 and 1
+// Scale factor for display
+const scale = 200;
 
-point.forEach(points => {
-    // Scale coordinates to canvas dimensions
-    const x = points[0] * canvas.width;
-    const y = points[1] * canvas.height;
-
-    // Define the dot style
-    ctx.fillStyle = 'black'; // Change color if needed
-
-    // Draw the dot as a filled circle
-    ctx.beginPath();
-    ctx.arc(x, y, dotRadius, 0, 2 * Math.PI);
-    ctx.fill();
+// Draw each point
+ctx.fillStyle = 'black';
+point.forEach(([x, y]) => {
+    const canvasX = (x + 1) * scale + 100; // Map x
+    const canvasY = (1 - y) * scale + 25; // Map y
+    ctx.fillRect(canvasX, canvasY, 1, 1);
 });
     </script>
 </body>
