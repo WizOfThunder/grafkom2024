@@ -39808,15 +39808,21 @@
         ]
     ]
 
-    points.forEach(point => {
-    const dot = document.createElement('span');
-    dot.style.left = `${point[0] * 100}%`; // Adjust multiplier based on container size
-    dot.style.top = `${point[1] * 100}%`;
-    dot.style.width = '10px';
-    dot.style.height = '10px';
-    dot.style.borderRadius = '50%';
-    dot.style.backgroundColor = 'black';
-    container.appendChild(dot);
+    const dotRadius = 2;
+const maxCoordinate = 1; // Assuming your data points are normalized between 0 and 1
+
+points.forEach(point => {
+    // Scale coordinates to canvas dimensions
+    const x = point[0] * canvas.width;
+    const y = point[1] * canvas.height;
+
+    // Define the dot style
+    ctx.fillStyle = 'black'; // Change color if needed
+
+    // Draw the dot as a filled circle
+    ctx.beginPath();
+    ctx.arc(x, y, dotRadius, 0, 2 * Math.PI);
+    ctx.fill();
 });
     </script>
 </body>
