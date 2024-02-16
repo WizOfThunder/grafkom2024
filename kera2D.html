@@ -39811,10 +39811,10 @@
     const dotRadius = 2;
 const maxCoordinate = 1; // Assuming your data points are normalized between 0 and 1
 
-points.forEach(point => {
+point.forEach(points => {
     // Scale coordinates to canvas dimensions
-    const x = point[0] * canvas.width;
-    const y = point[1] * canvas.height;
+    const x = points[0] * canvas.width;
+    const y = points[1] * canvas.height;
 
     // Define the dot style
     ctx.fillStyle = 'black'; // Change color if needed
